@@ -1,0 +1,55 @@
+/*.card {
+    border: none;
+    width: 500px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #0f172a;
+}
+
+.card h1,
+h6 {
+    color: #fff;
+}
+
+label {
+    color : #fff;
+
+}
+
+.btn-primary{
+    color: pink;
+}*/
+
+.container {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.col-md-6 {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  /* Resto del tuo stile per la card */
+  margin: 0 auto;
+}
+.login-title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.centrato {
+  color: #000000;
+  display: block;
+  text-align: center;
+}

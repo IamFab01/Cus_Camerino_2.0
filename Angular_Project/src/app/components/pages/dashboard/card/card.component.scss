@@ -1,0 +1,110 @@
+//STANDARD SCSS FOR PAGE PAYOUT.
+.page {
+    background: #f1f5f9;
+    color: black;
+    font-size: 2rem;
+}
+
+.page-box {
+    background: #1953b1;
+    color: white;
+    font-size: 36px;
+    min-height: 120px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.page-content {
+    background: white;
+    border-radius: 10px;
+    min-height: calc(100vh - 178px);
+    margin-top: -2rem;
+    padding: 1rem;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.page-content-data {
+    position: relative;
+}
+
+.page-content-data-inner {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+//SCSS FOR EMPLOYEE PAGE CONTENT
+.div-employee h3 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.mat-according {
+    margin-top: 20px;
+    width: 600px;
+    overflow: auto;
+}
+
+.mat-accordingSearch {
+    margin-top: 20px;
+    width: 600px;
+}
+
+.mat-expansion-panel {
+    margin-bottom: 2px;
+    width: 600px;
+}
+
+.text-operation {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px; /* Spazio desiderato tra i pulsanti */
+}
+
+.formAddCard {
+    margin-top: 20px;
+}
+
+.formSearchCard {
+    margin-top: 20px;
+}
+
+.formAddPoints {
+    margin-top: 20px;
+}
+
+.divFormAddCardLabel {
+    margin-top: 2px;
+}
+
+.mat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+//SCSS FOR USER
+.div-user h3 {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.card-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    max-width: 300px;
+    margin-left: 130px;
+
+}

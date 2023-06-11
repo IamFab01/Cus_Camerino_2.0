@@ -1,0 +1,3 @@
+# Cus_Camerino_WebApp
+Progetto sviluppato per l'esame di Programmazione di Applicazioni Web e Mobile. Il progetto consiste nello sviluppo di un sito web per la palestra Cus Camerino, dove inoltre è possibile creare account per clienti e dipendenti. I clienti potranno prenotare la fascia oraria desiderata per allenarsi, mentre i dipendenti potranno gestire i loro clienti visualizzando le loro informazioni, prenotazioni e premi. Il titolare potrà aggiungere nuovi dipendenti e assegnare a loro delle restrizioni (in questo caso darà la possibilità ai dipendenti di aggiungere ulteriori dipendenti).
+

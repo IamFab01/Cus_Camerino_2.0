@@ -1,0 +1,230 @@
+<div class="page">
+    <div class="page-box">SEZIONE PRENOTAZIONI</div>
+    <div class="page-content">
+        <div class="page-content-data">
+            <div class="page-content-data-inner">
+
+                <!------USER DIV--------->
+                <div class="div-user" *ngIf="!isVisible">
+                    <h3 *ngIf="!open">ECCO L'ELENCO DELLE OPERAZIONI CHE PUOI EFFETTUARE
+                        NELLA SEZIONE PRENOTAZIONI
+                    </h3>
+
+
+                    <div class="button-container" *ngIf="!open">
+                        <button mat-flat-button color="primary" style="margin-top: 10px;" (click)="showCalendar()">Vedi
+                            Calendario</button>
+                        <button mat-flat-button color="primary" style="margin-top: 10px;" (click)="openList = !openList">Vedi le tue
+                            prenotazioni
+                        </button>
+                    </div>
+
+                    <div class="div-info" *ngIf="openList">
+                        <h3 *ngIf="!searchedBooking">ECCO LE TUE PRENOTAZIONI</h3>
+
+                        <!----MAT ACCORDITION FOR USER BOOKINGS-->
+                        <mat-accordion class="mat-according" *ngIf="bookingsUser != undefined && !searchedBooking">
+                            <mat-expansion-panel hideToggle class="mat-expansion-panel"
+                                *ngFor="let booking of bookingsUser">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Data prenotazione: {{booking.dataPrenotazione | date:'dd-MM-yyyy'}}
+                                    </mat-panel-title>
+                                    <mat-card-subtitle>
+                                        Trattamento : {{booking.trattamento}}
+                                    </mat-card-subtitle>
+                                </mat-expansion-panel-header>
+                                <mat-panel-description>
+                                    Completata : {{completata(booking)}}
+                                    <br>
+                                    Ora Prenotazione: {{ booking.oraInizio}}
+                                </mat-panel-description>
+                                <button mat-raised-button class="btn-class"
+                                    (click)="removeBookingUser(booking)">Cancella
+                                </button>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+                        <!----MAT ACCORDITION FOR BOOKINGS SEARCHED-->
+                        <h3 *ngIf="searchedBooking">ECCO LE PRENOTAZIONI CERCATE</h3>
+                        <mat-accordion class="mat-according" *ngIf="searchedBooking">
+                            <mat-expansion-panel hideToggle class="mat-expansion-panel"
+                                *ngFor="let booking of searchedBookingsUser">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Data prenotazione: {{booking.dataPrenotazione | date:'dd-MM-yyyy'}}
+                                    </mat-panel-title>
+                                    <mat-card-subtitle>
+                                        Trattamento : {{booking.trattamento}}
+                                    </mat-card-subtitle>
+                                </mat-expansion-panel-header>
+                                <mat-panel-description>
+                                    Completata : {{completata(booking)}}
+                                    <br>
+                                    Ora Prenotazione: {{ booking.oraInizio}}
+                                </mat-panel-description>
+                                <button mat-raised-button class="btn-class"
+                                    (click)="removeBookingUser(booking)">Cancella
+                                </button>
+                            </mat-expansion-panel>
+                            <button mat-button (click)="closeSearchedBookingsUser()">Chiudi</button>
+                        </mat-accordion>
+
+
+                        <br>
+                        <button mat-flat-button color="primary" class="btn-class"
+                            (click)="showFormSearchBookingUser = !showFormSearchBookingUser">Cerca
+                            Prenotazione</button>
+
+
+                        <!----FORM TO SEARCH A BOOKING-->
+                        <form [formGroup]="form" (ngSubmit)="searchBookings()" *ngIf="showFormSearchBookingUser">
+                            <br>
+                            <mat-card>
+                                <mat-card-header>
+                                    <mat-card-title>CERCA PRENOTAZIONE</mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <br>
+                                    <mat-form-field>
+                                        <input type="date" matInput placeholder="Data Prenotazione"
+                                            formControlName="dataPrenotazione">
+                                    </mat-form-field>
+                                </mat-card-content>
+                                <mat-card-actions>
+                                    <button mat-button type="submit">Cerca Prenotazione</button>
+                                    <button mat-button (click)="closeSearchedBookingsUser()">Chiudi</button>
+                                </mat-card-actions>
+                            </mat-card>
+                        </form>
+
+                    </div>
+                </div>
+
+
+                <!-----EMPLOYEE DIV------>
+                <div class="div-employee" *ngIf="isVisible">
+                    <h3 *ngIf="!open">ECCO L'ELENCO DELLE OPERAZIONI CHE PUOI EFFETTUARE
+                        NELLA SEZIONE PRENOTAZIONI
+                    </h3>
+
+                    <div *ngIf="!open">
+                        <button mat-flat-button color="primary" style="margin-top: 10px;" (click)="getAllBookingsToday()">Vedi le
+                            prenotazioni di oggi
+                        </button>
+                        <br>
+                        <button mat-flat-button color="primary" style="margin-top: 10px;" (click)="open = !open">Vedi Calendario
+                        </button>
+                        <br>
+                        <button mat-flat-button color="primary" style="margin-top: 10px;"
+                            (click)="showFormSearchBookingUser = !showFormSearchBookingUser">Cerca prenotazioni cliente
+                        </button>
+                    </div>
+
+
+                    <div class="div-info" *ngIf="openList">
+                        <br>
+                        <h3>ECCO LE PRENOTAZIONI DI OGGI</h3>
+
+                        <!----MAT ACCORDITION FOR USER BOOKINGS-->
+                        <mat-accordion class="mat-according" *ngIf="bookingsToday != undefined">
+                            <mat-expansion-panel hideToggle class="mat-expansion-panel"
+                                *ngFor="let booking of bookingsToday">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Ora prenotazione: {{booking.oraInizio}}
+                                    </mat-panel-title>
+                                    <mat-card-subtitle>
+                                        Trattamento : {{booking.trattamento}}
+                                    </mat-card-subtitle>
+                                </mat-expansion-panel-header>
+                                <mat-panel-description>
+                                    Cliente: {{ booking.nome}} {{booking.cognome}}
+                                </mat-panel-description>
+                                <button mat-raised-button class="btn-class" (click)="removeBookingEmp(booking)">Cancella
+                                </button>
+                                <br>
+                                <br>
+                                <button mat-raised-button class="btn-class" (click)="setCompletata(booking)">Completata
+                                </button>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+                        <br>
+                        <button mat-raised-button class="btn-class" (click)="close()">Chiudi
+                        </button>
+
+                    </div>
+
+                    <!----MAT ACCORDITION FOR BOOKINGS SEARCHED-->
+                    <div class="div-info" *ngIf="searchedBooking">
+                        <br>
+                        <h3>ECCO LE PRENOTAZIONI DEL CLIENTE CERCATO</h3>
+                        <mat-accordion class="mat-according">
+                            <mat-expansion-panel hideToggle class="mat-expansion-panel"
+                                *ngFor="let booking of searchedBookingsUser">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Cliente: {{booking.nome}} {{booking.cognome}}
+                                    </mat-panel-title>
+                                    <mat-card-subtitle>
+                                        Trattamento : {{booking.trattamento}}
+                                    </mat-card-subtitle>
+                                </mat-expansion-panel-header>
+                                <mat-panel-description>
+                                    Ora Prenotazione: {{ booking.oraInizio}}
+                                </mat-panel-description>
+                                <br>
+                                <mat-panel-description>
+                                    Data prenotazione: {{booking.dataPrenotazione | date:'dd-MM-yyyy'}}
+                                </mat-panel-description>
+                                <button mat-raised-button class="btn-class" (click)="removeBookingEmp(booking)">Cancella
+                                </button>
+                                <br>
+                                <br>
+                                <button mat-raised-button class="btn-class" (click)="setCompletata(booking)">Completata
+                                </button>
+                            </mat-expansion-panel>
+                            <br>
+                            <button mat-raised-button class="btn-class"
+                                (click)="closeSearchedBookingsUser()">Chiudi</button>
+                        </mat-accordion>
+                    </div>
+
+                    <!----FORM TO SEARCH A BOOKING-->
+                    <form [formGroup]="form" (ngSubmit)="searchBookingsUser()" *ngIf="showFormSearchBookingUser">
+                        <br>
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>CERCA PRENOTAZIONI CLIENTE</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <br>
+                                <mat-form-field>
+                                    <input type="text" matInput placeholder="Nome" formControlName="nome">
+                                </mat-form-field>
+                                <br>
+                                <mat-form-field>
+                                    <input type="text" matInput placeholder="Cognome" formControlName="cognome">
+                                </mat-form-field>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-button type="submit">Cerca Cliente</button>
+                                <button mat-button (click)="closeSearchedBookingsUser()">Chiudi</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </form>
+                </div>
+            </div>
+            <!----CALENDAR FOR BOOKING-->
+            <div class='demo-app' *ngIf="open">
+                <div class='demo-app-main'>
+                    <full-calendar [options]='calendarOptions'>
+                    </full-calendar>
+                    <br>
+                    <button mat-raised-button class="btn-class" (click)="open = !open">Chiudi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>

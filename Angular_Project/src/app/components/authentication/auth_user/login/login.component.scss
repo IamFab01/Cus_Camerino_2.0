@@ -1,0 +1,31 @@
+
+.container {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.col-md-6 {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  /* Resto del tuo stile per la card */
+  margin: 0 auto;
+}
+.login-title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.centrato {
+  color: #000000;
+  display: block;
+  text-align: center;
+}

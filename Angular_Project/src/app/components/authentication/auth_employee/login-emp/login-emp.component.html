@@ -1,0 +1,35 @@
+
+
+<div class="container">
+
+  <div class="row">
+    <h1 class="login-title">Area Amministrazione</h1>
+
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+
+      <div class="card text-center">
+
+        </div>
+         <form [formGroup]="loginForm">
+          <p>
+            <mat-form-field appearance="fill">
+              <mat-label>Codice Utente</mat-label>
+              <input formControlName="code" type="code" id="exampleInputCode" aria-describedby="codeHelp" matInput placeholder="1234567">
+              <mat-icon matSuffix>business</mat-icon>
+              <span class="text-danger" *ngIf="loginForm.controls['code'].dirty && loginForm.hasError('required', 'code')">*Codice Utente richiesto</span>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input type="password" formControlName="password" matInput placeholder="Attento alle maiuscole">
+              <mat-icon matSuffix>vpn_key</mat-icon>
+              <span class="text-danger" *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')">Password richiesta</span>
+            </mat-form-field>
+          </p>
+
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="loginForm.invalid">Login</button>
+          </form>
+        </div>
+    </div>
+  </div>

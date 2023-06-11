@@ -1,0 +1,153 @@
+//STANDARD SCSS FOR PAGE PAYOUT.
+.page {
+    background: #f1f5f9;
+    color: black;
+    font-size: 2rem;
+}
+
+.page-box {
+    background: #1953b1;
+    color: white;
+    font-size: 36px;
+    min-height: 120px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.page-content {
+    background: white;
+    border-radius: 10px;
+    min-height: calc(100vh - 178px);
+    margin-top: -2rem;
+    padding: 1rem;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.page-content-data {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    /* Centra gli elementi orizzontalmente */
+    align-items: center;
+    /* Centra gli elementi verticalmente */
+}
+
+.page-content-data-inner {
+    display: flex;
+    flex-wrap: wrap;
+    /* Permette il wrapping degli elementi se non entrano tutti nella stessa riga */
+    justify-content: center;
+    /* Centra gli elementi orizzontalmente */
+    align-items: center;
+    /* Centra gli elementi verticalmente */
+    gap: 20px;
+    /* Spazio uniforme tra gli elementi */
+}
+
+
+
+//SCSS FOR EMPLOYEE
+.employeeDivMaster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 7px;
+    /* Centra gli elementi verticalmente */
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between 4px;
+    margin-top: 2px;
+    gap: 10px;
+}
+
+.example-card {
+    margin-top: 10px;
+    max-width: 330px;
+    max-height: 300px;
+    margin-bottom: 8px;
+    //background-color: darkgrey;
+}
+
+.allGiftsDiv {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(150px, auto);
+    grid-gap: 10px;
+    overflow: auto;
+}
+
+.createGiftsDiv{
+    margin-top: 30px;
+    max-width: 700px;
+
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+.example-full-width {
+    width: 100%;
+  }
+
+.formSearchUser{
+    display: flex;
+    justify-content: space-between 15px;
+    margin-top: 2px;
+}
+
+.buttonSearch{
+    width: 20px;
+    height: 56px;
+}
+
+.searchedUsersOne{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    font-size: 24px;
+
+    .title {
+        margin-bottom: 20px;
+    }
+
+    .card-containerOne {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        grid-template-columns: repeat(3, 1fr);
+
+        .example-card {
+            max-width: 300px;
+            margin: 20px;
+        }
+    }
+
+    button {
+        margin-top: 20px;
+    }
+}
+
+
+
+
+
+//SCSS FOR USER
+.userDivMaster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 7px;
+    /* Centra gli elementi verticalmente */
+}

@@ -1,0 +1,100 @@
+//STANDARD SCSS FOR PAGE PAYOUT.
+.page {
+  background: #f1f5f9;
+  color: black;
+  font-size: 2rem;
+}
+
+.page-box {
+  background: #1953b1;
+  color: white;
+  font-size: 36px;
+  min-height: 120px;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+.page-content {
+  background: white;
+  border-radius: 10px;
+  min-height: calc(100vh - 178px);
+  margin-top: -2rem;
+  padding: 1rem;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.page-content-data {
+  position: relative;
+}
+
+
+.page-content-data-inner {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+
+.div-employee h3 {
+  justify-content: center;
+  text-align: center;
+}
+
+
+.div-user h3 {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.div-info h3 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+
+.formSearchBooking {
+  margin-top: 20px;
+}
+
+.mat-according {
+  width: 600px;
+  overflow: auto;
+}
+
+.mat-expansion-panel {
+  margin-bottom: 2px;
+  width: 600px;
+}
+
+
+//SCSS for calendar
+.fc { /* the calendar root */
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.demo-app {
+  display: flex;
+  min-height: 100%;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.demo-app-main {
+  flex-grow: 1;
+  justify-content: center;
+  padding: 3em;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+
+  gap: 10px; /* Spazio desiderato tra i pulsanti */
+}
+
+

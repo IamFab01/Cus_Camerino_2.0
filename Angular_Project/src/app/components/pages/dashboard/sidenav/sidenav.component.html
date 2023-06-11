@@ -1,0 +1,23 @@
+<mat-nav-list>
+  <h2 matSubheader class="title">DASHBOARD </h2>
+  <a mat-list-item (click)="changeRoute('/account')">
+    <mat-icon class="icon">account_circle</mat-icon>
+    <span class="mat-list-item-content">Profilo</span>
+  </a>
+  <a mat-list-item (click)="changeRoute('/employees')" *ngIf="isEmployee && userType.restrizioni == 0">  <!--per titolare-->
+    <mat-icon class="icon">person_add</mat-icon>
+    <span class="mat-list-item-content">Account Dipendenti</span>
+  </a>
+  <a mat-list-item (click)="changeRoute('/card')">
+    <mat-icon class="icon">call_to_action</mat-icon>
+    <span class="mat-list-item-content">Tessera</span>
+  </a>
+  <a mat-list-item (click)="changeRoute('/booking')">
+    <mat-icon class="icon">event</mat-icon>
+    <span class="mat-list-item-content">Prenotazioni</span>
+  </a>
+  <a mat-list-item (click)="changeRoute('/gifts')">
+    <mat-icon class="icon">card_giftcard</mat-icon>
+    <span class="mat-list-item-content">Premi</span>
+  </a>
+</mat-nav-list>

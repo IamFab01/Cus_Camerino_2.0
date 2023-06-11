@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-drawer {
+  background-color: #173376;
+  width: 260px;
+}
+
+mat-drawer-container {
+  height: 100%;
+}
+
+.highlighted-text {
+  text-transform: uppercase;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 20px; /* opzionale, regola lo spazio inferiore tra l'immagine e il contenitore */
+}
+.icon {
+  width: 50px;
+  height: 50px;
+}
+
+

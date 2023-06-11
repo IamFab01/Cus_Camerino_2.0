@@ -1,0 +1,198 @@
+<div class="page">
+    <div class="page-box">SEZIONE REGALI</div>
+    <div class="page-content">
+        <div class="page-content-data">
+
+
+            <!-----EMPLOYEE DIV------>
+            <div class="employeeDivMaster" *ngIf="isEmployee && userType">
+                <h2>Ciao {{userType.nome}}</h2>
+                <h3>In questa sezione, potrai vedere tutti i premi che hai aggiunto<br>
+                    e che possono essere riscattati dai Clienti o aggiungerli manualmente.
+                </h3>
+                <h3>ELENCO LE POSSIBILI OPERAZIONI</h3>
+                <div class="button-container">
+                    <button mat-flat-button color="primary" class="btn-class" (click)="showAllGifts = !showAllGifts">Vedi
+                        Premi</button>
+                    <button mat-flat-button color="primary" class="btn-class" (click)="addNewGift = !addNewGift">Crea Premio</button>
+                    <button mat-flat-button color="primary" class="btn-class" (click)="showUsers = !showUsers">Clienti</button>
+                </div>
+
+                <!----DIV PER TUTTE LE GIFTS-->
+                <div class="allGiftsDiv" *ngIf="showAllGifts && allGifts && !addNewGift && !showUsers">
+                    <mat-card class="example-card" *ngFor="let gift of allGifts">
+                        <mat-card-header>
+                            <mat-card-title-group>
+                                <mat-card-title>{{gift.nome}}</mat-card-title>
+                                <mat-card-subtitle>Id Regalo : {{gift.id}}</mat-card-subtitle>
+                                <img mat-card-lg-image
+                                    src="https://m.media-amazon.com/images/I/71w3rQMeWNL._AC_SL1500_.jpg">
+                            </mat-card-title-group>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <h3>
+                                Punti per riscattare il seguente prodotto :
+                                {{gift.punti}}
+                            </h3>
+                        </mat-card-content>
+                        <button mat-button style="margin-top: 2px; color: red;" (click)="removeGifts(gift)">Rimuovi
+                            Premio</button>
+                    </mat-card>
+                </div>
+
+                <!----DIV PER CREARE UN REGALO-->
+                <form class="createGiftsDiv" *ngIf="addNewGift" [formGroup]="form">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>Crea Premio</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <h3>NOME PREMIO</h3>
+                            <mat-form-field>
+                                <input matInput placeholder="Nome Premio" formControlName="nome">
+                            </mat-form-field>
+                            <h3>PUNTI PER RISCATTARE IL PREMIO</h3>
+                            <mat-form-field>
+                                <input matInput placeholder="Punti" formControlName="punti">
+                            </mat-form-field>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button (click)="createGifts()">Crea Premio</button>
+                            <button mat-button (click)="undoCreation()">Annulla</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </form>
+
+
+                <!-----DIV CERCARE UTENTI CHE HANNO UN PREMIO----->
+                <div class="divShowUsers" *ngIf="showUsers">
+                    <h3 style="margin-top: 10px;">Qui sottostante, potrai vedere gli Utenti iscritti che hanno <br>
+                        riscattato dei premi.</h3>
+
+
+                    <div class="formSearchUser">
+                        <form class="example-form" [formGroup]="form">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Cognome</mat-label>
+                                <input type="nome" matInput formControlName="cognome">
+                            </mat-form-field>
+                        </form>
+
+                        <button mat-raised-button (click)="searchUsers()" class="buttonSearch">Cerca Cliente</button>
+                    </div>
+
+
+                    <!-----DIV PER L'UTENTE TROVATO-->
+                    <div class="searchedUsersOne" *ngIf="isUserFind && userFind">
+                        <h3 class="title">Elenco premi riscattati da : {{userFind.cognome}}</h3>
+
+                        <div class="card-containerOne" *ngIf="userFindGift.lenght != 0">
+                            <mat-card class="example-card" *ngFor="let gift of userFindGift">
+                                <mat-card-header>
+                                    <mat-card-title-group>
+                                        <mat-card-title>{{gift.nome}}</mat-card-title>
+                                        <mat-card-subtitle>Id Regalo : {{gift.id}}</mat-card-subtitle>
+                                        <img mat-card-lg-image
+                                            src="https://m.media-amazon.com/images/I/71w3rQMeWNL._AC_SL1500_.jpg">
+                                    </mat-card-title-group>
+                                </mat-card-header>
+                                <mat-card-content>
+                                    <h3>Valore del Premio riscattato : {{gift.punti}}</h3>
+                                </mat-card-content>
+                                <button mat-button style="margin-top: 2px; color: red;"
+                                    (click)="removeReward(gift.id, userFind.id)">Rimuovi Premio</button>
+                            </mat-card>
+                        </div>
+
+                        <div class="notSearchedUser" *ngIf="userFindGift.lenght <1 ">
+                            <h3>{{userFind.cognome}} non ha riscattato nessun Premio.</h3>
+                            <button mat-button (click)="closeSearchUsers()">Chiudi</button>
+                        </div>
+
+                        <button mat-button (click)="closeSearchUsers()">Chiudi</button>
+                    </div>
+
+
+
+                    <!-----DIV PER L'UTENTE NON TROVATO-->
+                    <div class="notSearchedUser" *ngIf="!isUserFind">
+                        <h3>Utente non trovato.</h3>
+                        <button mat-button (click)="closeSearchUsers()">Chiudi</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-----USER DIV------>
+            <div class="userDivMaster" *ngIf="!isEmployee && userType">
+                <p>Ciao {{userType.nome}}</p>
+                <h3>In questa sezione, puoi vedere tutti i premi disponibili<br>
+                    per poterli riscattare, ed eventualmente controllare i premi già riscattati</h3>
+                <br>
+                <div *ngIf="hasCard">
+                    <h3 style="color: green;">Hai ancora a disposizione : {{myCard?.punti}} punti</h3>
+                </div>
+                <div *ngIf="!hasCard">
+                    <h3 style="color: red;">Non possiedi ancora la Tessera. Puoi richiederla in Negozio fisico. </h3>
+
+                </div>
+                <h3 style="margin-top: 3px;">Ti ricordo che per ricevere il Premio effettivo, devi recarti in Negozio
+                    fisico.</h3>
+                <div class="button-container">
+                    <button mat-flat-button color="primary" class="btn-class" (click)="showAllGifts = !showAllGifts">Vedi
+                        Premi</button>
+                    <button mat-flat-button color="primary" class="btn-class" (click)="showMyReward = !showMyReward">Miei
+                        Premi</button>
+                </div>
+
+                <!------DIV PER VEDERE TUTTI I PREMI-------->
+                <div class="allGiftsDiv" *ngIf="showAllGifts && allGifts && !showMyReward">
+                    <mat-card class="example-card" *ngFor="let gift of allGifts">
+                        <mat-card-header>
+                            <mat-card-title-group>
+                                <mat-card-title>{{gift.nome}}</mat-card-title>
+                                <mat-card-subtitle>Id Regalo : {{gift.id}}</mat-card-subtitle>
+                                <img mat-card-lg-image
+                                    src="https://m.media-amazon.com/images/I/71w3rQMeWNL._AC_SL1500_.jpg">
+                            </mat-card-title-group>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <h3>
+                                Punti per riscattare il seguente prodotto :
+                                {{gift.punti}}
+                            </h3>
+                            <button mat-button style="margin-top: 2px;" (click)="retreiveGift(gift)">Riscatta
+                                Premio</button>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+
+
+                <!----------DIV PER VEDERE I MIEI PREMI------>
+                <div class="allGiftsDiv" *ngIf="showMyReward && allMyGifts != null">
+                    <mat-card class="example-card" *ngFor="let gift of allMyGifts">
+                        <mat-card-header>
+                            <mat-card-title-group>
+                                <mat-card-title>{{gift.nome}}</mat-card-title>
+                                <mat-card-subtitle>Id Regalo : {{gift.id}}</mat-card-subtitle>
+                                <img mat-card-lg-image
+                                    src="https://m.media-amazon.com/images/I/71w3rQMeWNL._AC_SL1500_.jpg">
+                            </mat-card-title-group>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <h3>
+                                Valore del Premio riscattato :
+                                {{gift.punti}}
+                            </h3>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

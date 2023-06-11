@@ -1,0 +1,81 @@
+//STANDARD SCSS FOR PAGE PAYOUT.
+.page {
+    background: #f1f5f9;
+    color: black;
+    font-size: 2rem;
+}
+
+.page-box {
+    background: #1953b1;
+    color: white;
+    font-size: 36px;
+    min-height: 120px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.page-content {
+    background: white;
+    border-radius: 10px;
+    min-height: calc(100vh - 178px);
+    margin-top: -2rem;
+    padding: 1rem;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.page-content-data {
+    position: relative;
+}
+
+.page-content-data-inner {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+//SCSS per non Restrizioni:
+.masterDivRest {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container {
+    width: 300px;
+    margin-top: 20px;
+    margin-left: 130px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mat-according {
+    margin-top: 30px;
+    width: 600px;
+}
+
+.formCreateAccount {
+    margin-top: 30px;
+}
+
+.formSearchUser {
+    display: flex;
+    justify-content: space-between 15px;
+    margin-top: 2px;
+}
+
+.buttonSearch {
+    margin-left: 10px;
+    width: 100px;
+    height: 56px;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}

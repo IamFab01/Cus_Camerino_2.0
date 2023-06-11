@@ -1,0 +1,35 @@
+<div class="container">
+
+  <div class="row">
+    <h1 class="login-title">Accedi al tuo Account</h1>
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <div class="card text-center">
+        </div>
+         <form [formGroup]="loginForm">
+          <p>
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input formControlName="email" type="email" id="exampleInputEmail" aria-describedby="emailHelp" matInput placeholder="prova@prova.com">
+              <mat-icon matSuffix>mail</mat-icon>
+              <span class="text-danger" *ngIf="loginForm.controls['email'].dirty && loginForm.hasError('required', 'email')">*Email richiesta.</span>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input type="password" formControlName="password" matInput placeholder="Attento alle maiuscole">
+              <mat-icon matSuffix>vpn_key</mat-icon>
+              <span class="text-danger" *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')">Password richiesta</span>
+            </mat-form-field>
+          </p>
+
+
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="loginForm.invalid">Login</button>
+          </form>
+        </div>
+    </div>
+  </div>
+  <a class="centrato" routerLink="/signup-user">Non possiedi un account? Iscriviti</a>
+  <br>
+  <a class="centrato"  routerLink="/login-emp">Area Amministrativa</a>
+

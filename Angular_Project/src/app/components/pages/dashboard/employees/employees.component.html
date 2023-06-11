@@ -1,0 +1,125 @@
+<div class="page">
+    <div class="page-box">SEZIONE ACCOUNT DIPENDENTI</div>
+    <div class="page-content">
+        <div class="page-content-data">
+            <div class="page-content-data-inner">
+
+                <!------DIV RESTRIZIONI 0----->
+                <div class="masterDivNoRest" *ngIf="!haveRestriction">
+                    <h3>In questa sezione, potrai controllare tutti gli Account dei Dipendenti <br>
+                        che hanno accesso alla piattafroma e gestirli.<br></h3>
+                    <h3>ELENCO LE POSSIBILI OPERAZIONI</h3>
+                    <div class="button-container">
+                        <button mat-flat-button color="primary" class="btn-class"
+                            (click)="showFormCreateAccount = !showFormCreateAccount">Crea Account</button>
+                        <button mat-flat-button color="primary" class="btn-class"
+                            (click)="showFormSearchAccount = !showFormSearchAccount">Cerca
+                            Account</button>
+                    </div>
+
+                    <!--------DIV PER MOSTRARE GLI ACCOUNT----->
+                    <div class="mat-according">
+                        <mat-accordion *ngIf="!showFormCreateAccount && !showFormSearchAccount">
+                            <mat-expansion-panel hideToggle class="mat-expansion-panel"
+                                *ngFor="let account of allEmployeeAccounts">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Codice : {{account.codice}}
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                        Nome: {{account.nome}}
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <p>Restrizioni : {{account.restrizioni}}</p>
+                                <button mat-raised-button class="btn-class"
+                                    (click)="removeAccountEmployee(account.id)">Rimuovi Account</button>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+
+                    <!------DIV PER CREAZIONE ACCOUNT-->
+                    <form class="formCreateAccount" *ngIf="showFormCreateAccount" [formGroup]="form">
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>Nuovo Account Dipendente</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <h3>NOME</h3>
+                                <mat-form-field>
+                                    <input matInput placeholder="Nome Dipendente" formControlName="nome">
+                                </mat-form-field>
+                                <h3>CODICE (Numerico)</h3>
+                                <mat-form-field>
+                                    <input matInput placeholder="Codice Dipendente" formControlName="codice">
+                                </mat-form-field>
+                                <h3>PASSWORD TEMPORANEA</h3>
+                                <mat-form-field>
+                                    <input matInput placeholder="Password Temporanea" formControlName="password">
+                                </mat-form-field>
+                            </mat-card-content>
+                            <mat-radio-group style="margin-top: 20px;" aria-label="Select an option"
+                                formControlName="restrizioni">
+                                <mat-radio-button
+                                    style="margin-left: 3px; background-color: white; border-bottom-style: 20%;"
+                                    value="0">Accesso
+                                    Completo</mat-radio-button>
+                                <mat-radio-button style="margin-left: 3px; background-color: white; border-bottom: 50%;"
+                                    value="1">Accesso
+                                    Ristretto</mat-radio-button>
+                            </mat-radio-group>
+                            <mat-card-actions>
+                                <button mat-button (click)="createEmployeeAccount()">Crea Account</button>
+                                <button mat-button (click)="undoCreation()" style="margin-left: 10px;">Annulla</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </form>
+
+                    <!--------DIV PER LA RICERCA DI UN ACCOUNT----->
+                    <div class="formSearchUser" *ngIf="showFormSearchAccount">
+                        <form class="example-form" [formGroup]="form">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Nome</mat-label>
+                                <input type="nome" matInput formControlName="nome">
+                            </mat-form-field>
+                        </form>
+
+                        <button mat-raised-button (click)="searchAccount()" class="buttonSearch">Cerca
+                            Dipendente</button>
+                    </div>
+
+                    <!-------DIV PER UTENTE TROVATO------>
+                    <div class="mat-according" *ngIf="searched && accountSearch">
+                        <mat-accordion>
+                            <mat-expansion-panel hideToggle class="mat-expansion-panel">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        Codice : {{accountSearch.codice}}
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                        Nome: {{accountSearch.nome}}
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <p>Restrizioni : {{accountSearch.restrizioni}}</p>
+                                <button mat-raised-button class="btn-class"
+                                    (click)="removeAccountEmployee(accountSearch.id)">Rimuovi Account</button>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                        <button mat-button (click)="undoSearchAccount()" style="margin-left: 10px;">Annulla</button>
+                    </div>
+
+                    <!------DIV PER UTENTE NON TROVATO------>
+                    <div class="mat-according" *ngIf="!searched && showFormSearchAccount">
+                        <h3>Account dipendente non trovato</h3>
+                    </div>
+                </div>
+
+
+                <!------DIV RESTRIZIONI 1---->
+                <div class="masterDivRest" *ngIf="haveRestriction">
+                    <h3 style="font-size: 25px; margin-top: 100px;">Non disponi delle autorizzazioni necessarie <br>
+                        per questa sezione.</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

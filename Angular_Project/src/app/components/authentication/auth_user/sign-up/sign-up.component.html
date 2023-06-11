@@ -1,0 +1,47 @@
+<br><br><br><br><br><br><br><div class ="container">
+    <div class="row">
+      <h1 class="login-title">Registrazione</h1>
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+
+                <div class="text-center">
+
+                </div>
+                <form>
+                    <form [formGroup]="signupForm">
+                      <p>
+                        <mat-form-field appearance="fill">
+                          <mat-label>Nome</mat-label>
+                          <input formControlName="fullname" type="text" id="inputName" matInput placeholder="Es. Mario">
+                          <mat-icon matSuffix>perm_identity</mat-icon>
+                        </mat-form-field>
+                      </p>
+                      <p>
+                        <mat-form-field appearance="fill">
+                          <mat-label>Cognome</mat-label>
+                          <input formControlName="lastname" type="text" id="inputLastName" matInput placeholder="Es. Rossi">
+                          <mat-icon matSuffix>perm_identity</mat-icon>
+                        </mat-form-field>
+                      </p>
+                      <p>
+                        <mat-form-field appearance="fill">
+                          <mat-label>Email</mat-label>
+                          <input formControlName="email" type="text" id="inputEmail" aria-describedby="emailHelp" matInput placeholder="prova@prova.com">
+                          <mat-icon matSuffix>mail</mat-icon>
+                        </mat-form-field>
+                      </p>
+                      <p>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Password</mat-label>
+                        <input  type="password" formControlName="password" id="inputPassword" minlength="6" required matInput placeholder="Minimo 6 caratteri">
+                        <mat-icon matSuffix>vpn_key</mat-icon>
+                      </mat-form-field>
+                    </p>
+                        <button type="submit" class="btn btn-primary mb-2" [disabled]="signupForm.invalid" (click)="onSubmit()">Registrami</button>
+                    </form>
+                    <a style="color: #fff; margin-top: 5px;" routerLink="/login-user">Possiedi già un account ? Login.</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
