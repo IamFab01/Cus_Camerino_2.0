@@ -30,9 +30,7 @@
                                     <mat-panel-title>
                                         Data prenotazione: {{booking.dataPrenotazione | date:'dd-MM-yyyy'}}
                                     </mat-panel-title>
-                                    <mat-card-subtitle>
-                                        Trattamento : {{booking.trattamento}}
-                                    </mat-card-subtitle>
+
                                 </mat-expansion-panel-header>
                                 <mat-panel-description>
                                     Completata : {{completata(booking)}}
@@ -54,9 +52,6 @@
                                     <mat-panel-title>
                                         Data prenotazione: {{booking.dataPrenotazione | date:'dd-MM-yyyy'}}
                                     </mat-panel-title>
-                                    <mat-card-subtitle>
-                                        Trattamento : {{booking.trattamento}}
-                                    </mat-card-subtitle>
                                 </mat-expansion-panel-header>
                                 <mat-panel-description>
                                     Completata : {{completata(booking)}}
@@ -134,9 +129,6 @@
                                     <mat-panel-title>
                                         Ora prenotazione: {{booking.oraInizio}}
                                     </mat-panel-title>
-                                    <mat-card-subtitle>
-                                        Trattamento : {{booking.trattamento}}
-                                    </mat-card-subtitle>
                                 </mat-expansion-panel-header>
                                 <mat-panel-description>
                                     Cliente: {{ booking.nome}} {{booking.cognome}}
@@ -167,9 +159,6 @@
                                     <mat-panel-title>
                                         Cliente: {{booking.nome}} {{booking.cognome}}
                                     </mat-panel-title>
-                                    <mat-card-subtitle>
-                                        Trattamento : {{booking.trattamento}}
-                                    </mat-card-subtitle>
                                 </mat-expansion-panel-header>
                                 <mat-panel-description>
                                     Ora Prenotazione: {{ booking.oraInizio}}
