@@ -3,8 +3,15 @@
 /*Viene importato il modulo Express.js e viene inizializzata un'istanza dell'applicazione Express chiamata app. 
 Questa istanza sarà utilizzata per definire le route e configurare l'applicazione.*/
 const express = require('express'); 
+const helmet = require('helmet');
 const app = express();
 
+/*per contrastare attacchi XSS*/
+app.use(
+    helmet({
+      xssFilter: true, // Abilita la protezione XSS
+    })
+  );
 
 //Configurazione Express per gestire il parsing delle richieste
 
