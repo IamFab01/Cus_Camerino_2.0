@@ -31,10 +31,6 @@ Booking.init({
         type : DataTypes.TIME,
         allowNull: false
     },
-    trattamento : {
-        type: DataTypes.CHAR(80),
-        allowNull: false
-    },
     completata: {
         type: DataTypes.INTEGER(1),
         allowNull: false

@@ -7,7 +7,6 @@ export class Booking {
     dataPrenotazione: Date;
     oraInizio: Time;
     oraFine: Time;
-    trattamento: String;
     completata: Number;
 
 
@@ -18,7 +17,6 @@ export class Booking {
         dataPrenotazione: Date,
         oraInizio: Time,
         oraFine: Time,
-        trattamento: String,
         completata: Number,
     ) {
         this.id = id;
@@ -28,7 +26,6 @@ export class Booking {
         this.oraInizio = oraInizio;
         this.oraFine = oraFine;
         this.completata = completata;
-        this.trattamento = trattamento;
     }
 
     setCompletata(completata: Number): void {
@@ -49,10 +46,6 @@ export class Booking {
 
     setDataPrenotazione(dataPrenotazione: Date): void {
         this.dataPrenotazione = dataPrenotazione;
-    }
-
-    getTrattamento() {
-        return this.trattamento;
     }
 
 }

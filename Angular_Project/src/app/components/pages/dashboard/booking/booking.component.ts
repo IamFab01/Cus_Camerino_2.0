@@ -29,7 +29,7 @@ export class BookingComponent {
   //This is the variable for associated the User access account. (User or Employee).
   userType: User | Employee | undefined;
 
-  //This is the variable, that indicates if the User is User or Employee, for determinate the div page. 
+  //This is the variable, that indicates if the User is User or Employee, for determinate the div page.
   isVisible = false;
 
   //This is a variable, to associate all Http response.
@@ -93,7 +93,7 @@ export class BookingComponent {
 
 
   /**
-      * Constructor for this Component. 
+      * Constructor for this Component.
       * @param httpClient the HttpClient object.
       * @param authUser the UserService for get the User/Employee logged.
       * @param formBuilder the FormBuilder object for the Forms.
@@ -118,7 +118,7 @@ export class BookingComponent {
     }
   }
 
-  //This is the method for init the FormGroup. 
+  //This is the method for init the FormGroup.
   initForm() {
     this.form = this.formBuilder.group({
       dataPrenotazione: ['dd-MM-yyyy', Validators.required],
@@ -168,7 +168,6 @@ export class BookingComponent {
       if (this.userType instanceof User) {
         if (booking.nome === this.userType?.nome && booking.cognome === this.userType?.cognome) {
           events.push({
-            title: booking.trattamento,
             start: date + 'T' + booking.oraInizio,
             end: date + 'T' + booking.oraFine,
             color: 'green'
@@ -183,7 +182,6 @@ export class BookingComponent {
         }
       } else {
         events.push({
-          title: booking.trattamento,
           start: date + 'T' + booking.oraInizio,
           end: date + 'T' + booking.oraFine,
           color: this.getRandomColor()
@@ -228,15 +226,10 @@ export class BookingComponent {
       })
     };
     if (booking.completata === 0) {
-      const descrizione = this.completaPrenotazioneConDescrizione();
       this.httpClient.post(`${environment.baseUrl}/booking/update/${booking.id}`, { completata: 1 }, httpOptions).subscribe(
         response => {
           this.data = response;
-          if (this.data.status == 200) {
-            this.addTreatment(booking, descrizione);
-          } else {
-            alert("Prenotazione non aggiornata riprovare");
-          }
+
         }, err => {
           alert("Something went wrong");
         });
@@ -244,38 +237,6 @@ export class BookingComponent {
       alert("Prenotazione già completata");
     }
   }
-
-
-  completaPrenotazioneConDescrizione() {
-    const descrizione = prompt("Inserisci una descrizione per il trattamento");
-    return descrizione;
-  }
-
-
-  //This method create new Treatment when booking is completed
-  addTreatment(booking: Booking, descrizione: string | null) {
-    const token = localStorage.getItem('accessToken');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + token
-      })
-    };
-    this.httpClient.put(`${environment.baseUrl}/treatment/create`, { nome: booking.nome, cognome: booking.cognome, nomeTrattamento: booking.trattamento, descrizione: descrizione, data: booking.dataPrenotazione }, httpOptions).subscribe(
-      response => {
-        this.data = response;
-        if (this.data.status == 201) {
-          alert("Trattamento aggiunto con successo.");
-          booking.completata = 1;
-        } else if (this.data.status == 404) {
-          alert("Utente non trovato riprovare.");
-        } else {
-          alert("Errore nella creazione del trattamento.");
-        }
-      }, err => {
-        alert("Something went wrong");
-      });
-  }
-
 
   //This method allows you to search a Bookings of a specific user
   searchBookingsUser() {
@@ -475,7 +436,6 @@ export class BookingComponent {
   }
 
   showAlertToAdd(selectInfo: DateSelectArg) {
-    const title = prompt('Inserisci il nome del trattamento da effettuare');
     const nome = prompt('Inserisci il nome del cliente');
     const cognome = prompt('Inserisci il cognome del cliente');
 
@@ -483,20 +443,20 @@ export class BookingComponent {
 
     calendarApi.unselect(); //  clear date selection
 
-    if (title && nome && cognome) {
+    if (nome && cognome) {
       if (this.userType instanceof User) {
         if (nome != this.userType.nome || cognome != this.userType.cognome) {
           alert("Nome e cognome errati. Riprovare.");
         } else {
-          this.addBooking(selectInfo, title, nome, cognome);
+          this.addBooking(selectInfo, nome, cognome);
         }
       } else if (this.userType instanceof Employee) {
-        this.addBooking(selectInfo, title, nome, cognome);
+        this.addBooking(selectInfo, nome, cognome);
       }
     }
   }
 
-  addBooking(selectInfo: DateSelectArg, title: string, nome: string, cognome: string) {
+  addBooking(selectInfo: DateSelectArg, nome: string, cognome: string) {
     const token = localStorage.getItem('accessToken');
     const httpOptions = {
       headers: new HttpHeaders({
@@ -505,7 +465,7 @@ export class BookingComponent {
     };
     this.httpClient.put(`${environment.baseUrl}/booking/create`, {
       nome: nome, cognome: cognome, dataPrenotazione: selectInfo.view.activeStart, oraInizio: selectInfo.startStr,
-      oraFine: selectInfo.endStr, trattamento: title, completata: 0
+      oraFine: selectInfo.endStr, completata: 0
     }, httpOptions).subscribe(response => {
       this.data = response;
       if (this.data.status === 201) {
