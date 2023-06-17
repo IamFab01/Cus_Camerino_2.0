@@ -457,33 +457,38 @@ export class BookingComponent {
   }
 
   addBooking(selectInfo: DateSelectArg, nome: string, cognome: string) {
-    const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('accessToken'); //recupero token di accesso
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Bearer ' + token   //assicuro che la richiesta sia autenticata correttamente
       })
     };
-    this.httpClient.put(`${environment.baseUrl}/booking/create`, {
-      nome: nome, cognome: cognome, dataPrenotazione: selectInfo.view.activeStart, oraInizio: selectInfo.startStr,
+      this.httpClient.put(`${environment.baseUrl}/booking/create`, {
+        nome: nome, cognome: cognome, dataPrenotazione: selectInfo.view.activeStart, oraInizio: selectInfo.startStr,
       oraFine: selectInfo.endStr, completata: 0
-    }, httpOptions).subscribe(response => {
-      this.data = response;
-      if (this.data.status === 201) {
-        alert("Prenotazione aggiunta con successo.");
-        if (this.userType instanceof User) {
-          this.getBookingUser();
-          this.getAllBookings();
-        } else if (this.userType instanceof Employee) {
-          this.getAllBookings();
+      }, httpOptions).subscribe({
+        next: (response: any) => {
+          // Callback per la risposta successo
+          this.data = response;
+          if (this.data.status === 201) {
+            alert("Prenotazione aggiunta con successo.");
+            if (this.userType instanceof User) {
+              this.getBookingUser();
+              this.getAllBookings();
+            } else if (this.userType instanceof Employee) {
+              this.getAllBookings();
+            }
+            //Callback per errore
+          } else if (this.data.status === 404) {
+            alert("Utente non trovato.");
+          } else {
+            alert("Errore nella creazione.");
+          }
+        },
+        error: (err: any) => {
+          alert("Funzione al momento non disponibile");
         }
-      } else if (this.data.status === 404) {
-        alert("Utente non trovato.");
-      } else {
-        alert("Errore nella creazione.");
-      }
-    }, err => {
-      alert("Errore");
-    });
+      });
   }
 }
 

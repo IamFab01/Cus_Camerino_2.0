@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        if (event.url === '' || event.url === '/' || event.url === '/info' || event.url === '/contact' || event.url === '/gym') {
+        if (event.url === '/' || event.url === '/info' || event.url === '/contact' || event.url === '/gym') {
           this.showMenuBar = true;
         } else {
           this.showMenuBar = false;
